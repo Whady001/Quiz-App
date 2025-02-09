@@ -1,3 +1,4 @@
+//Sample Questions
 const quizData = [
     {
     question: "When did Nigeria gain independence from British rule?",
@@ -80,6 +81,7 @@ const quizData = [
     correct: "a",
 }
 ];
+//DOM manipulations
 const quiz = document.getElementById("quiz");
 const submitButton = document.getElementById("submit");
 const result = document.getElementById("result");
@@ -88,7 +90,8 @@ const questionCounter = document.getElementById("questionCounter");
 let currentQuestionIndex = 0;
 let score = 0;
 
-function loadQuestion (){
+//defining the order of appearance of questions + displaying of current question count
+function loadQuestion () {
     const currentQuestion = quizData[currentQuestionIndex];
     quiz.innerHTML = 
         `<div class="question">${currentQuestion.question}</div>
@@ -99,7 +102,8 @@ function loadQuestion (){
     `;
     questionCounter.innerHTML = `Question ${currentQuestionIndex + 1} of ${quizData.length}`;
 }
-function getSelectedAnswer(){
+
+function getSelectedAnswer() {
     const answers =  document.querySelectorAll('input[name="answer"]');
     for (const answer of answers) {
         if(answer.checked) {
@@ -109,13 +113,15 @@ function getSelectedAnswer(){
     return null;
 }   
 
-function calculateScore(){
+//identifying that the correct answer has been selected
+function calculateScore() {
     const selectedAnswer = getSelectedAnswer();
     if (selectedAnswer === quizData[currentQuestionIndex].correct) {
         score++;
     }
 }
 
+//ensures user selects an answer before going to the next question, calculates total score and presents the result
 submitButton.addEventListener("click", () => {
     const selectedAnswer = getSelectedAnswer();
     if (!selectedAnswer) {
